@@ -142,30 +142,6 @@ public class EntityManager extends PluginBase implements Listener{
     }
 
     @EventHandler
-    public void PlayerInteractEvent(PlayerInteractEvent ev){
-        if(ev.getFace() == 255 || ev.getAction() != PlayerInteractEvent.RIGHT_CLICK_BLOCK){
-            return;
-        }
-
-        Item item = ev.getItem();
-        Player player = ev.getPlayer();
-        Block pos = ev.getBlock().getSide(ev.getFace());
-
-        if(item.getId() == Item.SPAWN_EGG){
-            Entity entity = PureEntities.create(item.getDamage(), pos);
-            if(entity != null){
-                entity.spawnToAll();
-            }
-
-            if(player.isSurvival()){
-                item.count--;
-                player.getInventory().setItemInHand(item);
-            }
-            ev.setCancelled();
-        }
-    }
-
-    @EventHandler
     public void ExplosionPrimeEvent(ExplosionPrimeEvent ev){
         switch(this.getData("entity.explodeMode", "none")){
             case "onlyEntity":
