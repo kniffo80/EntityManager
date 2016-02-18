@@ -28,11 +28,7 @@ See documentation page for details.
   * config.yml
 ``` yml
 entity:
-  explode: false #엔티티 폭발 여부
-spawner:
-  turn-on: true #스포너 기능 활성화 여부
-  rand: "1/4" #엔티티 소환 확률
-  tick: 100 #스폰 주기
+  explodeMode: false #엔티티 폭발모드(none, onlyEntity)
 autospawn:
   turn-on: true #자동 소환 활성화 여부
   rand: "1/4" #엔티티 스폰 확률
@@ -46,10 +42,8 @@ autoclear:
   tick: 6000 #엔티티 제거 주기
   entities: [Projectile, DroppedItem] #제거될 엔티티 목록
 ```
-  * spawner.yml
-    * TODO
   * drops.yml
-    * This isn't implemented yet
+    * TODO
   
 ### Commands(명령어)
   * /entitymanager
@@ -67,61 +61,4 @@ autoclear:
     * usage: /entitymanager spawn (type) (x="") (y="") (z="") (Level="")
     * permission: entitymanager.command.spawn
     * description: literally(If blank, it is set as a Player)
-
-### Method(메소드)
-  * EntityManager
-    * public static void clear()
-    * public static void clear(Class[] type, type)
-    * public static void clear(Class[] type, Level level)
-    * 
-    * public static BaseEntity create(int type, Position pos, Object... args)
-    * public static BaseEntity create(String type, Position pos, Object... args)
-  * BaseEntity
-    * public boolean isMovement()
-    * public boolean isFriendly()
-    * public boolean isWallCheck()
-    * 
-    * public void setMovement(boolean value)
-    * public void setFriendly(boolean value)
-    * public void setWallCheck(boolean value)
-  * Monster, FlyMonster
-    * public double getDamage();
-    * public double getDamage(int difficulty)
-    * 
-    * public double getMinDamage()
-    * public double getMinDamage(int difficulty)
-    * 
-    * public double getMaxDamage()
-    * public double getMaxDamage(int difficulty)
-    * 
-    * public void setDamage(double damage)
-    * public void setDamage(double[] damage)
-    * public void setDamage(double damage, int difficulty)
-  * PigZombie, Wolf, Ocelot
-    * public boolean isAngry()
-    * public void setAngry(int angry)
-
-### Method Examples(메소드 예시)
-``` java
-//Entity Method
-EntityManager.getEntities().forEach((id, baseEntity) -> {
-    if(!baseEntity.isMovement()){
-        baseEntity.setMovement(true);
-    }
-    if(baseEntity instanceof Monster){
-        Monster mob = (Monster) baseEntity;
-
-        mob.setDamage(10);
-
-        mob.setMaxDamage(10);
-        mob.setMinDamage(10);
-    }
-});
-
-//Create Entity
-Arrow arrow = (Arrow) EntityManager.create("Arrow", position, player, true);
-Zombie zombie = (Zombie) EntityManager.create("Zombie", position);
-
-//Remove Entity
-EntityManager.clear(new Class[]{BaseEntity.class, Projectile.class, Item.class});
 ```
