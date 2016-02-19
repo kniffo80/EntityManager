@@ -8,11 +8,11 @@ Author(제작자): **[SW-Team](https://github.com/SW-Team)**
   
 **[알림] 이 플러그인은 완벽하지 않으며 엔티티가 비정상적으로 움직일 수 있습니다 (Java8로 작성되었습니다)**
   
-EntityManager is a plugin for managing entities, literally.  
-This plugin is required [PureEntities](https://github.com/milk0417/PureEntities) for implement entity
+EntityManager is a plugin for managing entities(Mob, Animal), literally.  
+This plug-in requires [PureEntities](https://github.com/SW-Team/PureEntities) that support Entity
     
 EntityManager는 말 그대로 Entity(Mob, Animal)를 관리하는 플러그인을 의미합니다.  
-이 플러그인은 Entity를 Nukkit에서 구현시켜주는 [PureEntities](https://github.com/milk0417/PureEntities) 플러그인이 필요합니다.
+이 플러그인은 Entity를 Nukkit에서 구현시켜주는 [PureEntities](https://github.com/SW-Team/PureEntities) 플러그인이 필요합니다.
   
 ### YAML data
   * config.yml
