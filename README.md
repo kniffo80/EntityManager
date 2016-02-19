@@ -4,10 +4,6 @@ Author(제작자): **[SW-Team](https://github.com/SW-Team)**
   
 자매품(PMMP): [EntityManager-PMMP](https://github.com/milk0417/EntityManager)
   
-**[NOTICE] This plug-in is not perfect, the entity may move abnormally (It was written in Java8)**
-  
-**[알림] 이 플러그인은 완벽하지 않으며 엔티티가 비정상적으로 움직일 수 있습니다 (Java8로 작성되었습니다)**
-  
 EntityManager is a plugin for managing entities(Mob, Animal), literally.  
 This plug-in requires [PureEntities](https://github.com/SW-Team/PureEntities) that support Entity
     

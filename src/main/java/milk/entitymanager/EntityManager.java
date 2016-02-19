@@ -84,11 +84,11 @@ public class EntityManager extends PluginBase implements Listener{
         drops = (LinkedHashMap<String, Object>) new Config(new File(this.getDataFolder(), "drops.yml"), Config.YAML).getAll();
 
         /*Drops Example
-        "Zombie":
+        Zombie:
           #id  meta count
           [288, 0, "1,10"],
           [392, 0, "1,10"]
-        "PigZombie":
+        PigZombie:
           [266, 0, "0,8"]
         */
 
