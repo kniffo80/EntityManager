@@ -24,7 +24,7 @@ public class AutoSpawnTask implements Runnable{
         }catch(Exception ignore){}
 
         Server.getInstance().getOnlinePlayers().forEach((id, player) -> {
-            if(Utils.rand(rand[0], rand[1]) > rand[0]){
+            if(Utils.rand(1, rand[1]) > rand[0]){
                 return;
             }
 
