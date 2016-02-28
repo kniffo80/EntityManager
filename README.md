@@ -29,7 +29,12 @@ autoclear:
   entities: [Projectile, DroppedItem] #제거될 엔티티 목록
 ```
   * drops.yml
-    * TODO
+``` yml
+Zombie:
+  
+Creeper:
+  
+```
   
 ### Commands(명령어)
   * /entitymanager

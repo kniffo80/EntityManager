@@ -20,7 +20,6 @@ import cn.nukkit.utils.TextFormat;
 import milk.pureentities.PureEntities;
 import milk.pureentities.entity.*;
 import milk.entitymanager.task.AutoClearTask;
-import milk.entitymanager.task.AutoSpawnTask;
 import milk.entitymanager.util.Utils;
 
 import java.io.File;
@@ -48,19 +47,44 @@ public class EntityManager extends PluginBase implements Listener{
         }
     }
 
-    public static void setEntityDropItem(String name, Item item, int minCount, int maxCount){
-        List list;
-        if(!drops.containsKey(name) || !(drops.get(name) instanceof List)){
+    public static void addEntityDropItem(String name, Item item, int minCount, int maxCount){
+        ArrayList<Object> list;
+        if(!drops.containsKey(name) || !(drops.get(name) instanceof ArrayList)){
             list = new ArrayList<>();
             drops.put(name, list);
         }else{
-            list = (List) drops.get(name);
+            list = (ArrayList<Object>) drops.get(name);
         }
-        list.add(new ArrayList<Object>(){{
-            add(item.getId());
-            add(item.getDamage());
-            add(minCount + "/" + maxCount);
-        }});
+
+        boolean isIn = false;
+        for(Object l : list.toArray(new Object[list.size()])){
+            if(!(l instanceof ArrayList)){
+                return;
+            }
+
+            ArrayList<Object> list1 = (ArrayList<Object>) l;
+            if(list1.get(0).equals(item.getId())){
+                isIn = true;
+                list1.set(2, minCount + "," + maxCount);
+                break;
+            }
+        }
+
+        if(!isIn){
+            list.add(new ArrayList<Object>(){{
+                add(item.getId());
+                add(item.getDamage());
+                add(minCount + "," + maxCount);
+            }});
+        }
+    }
+
+    public static void resetEntityDropItem(String name){
+        if(!drops.containsKey(name) || !(drops.get(name) instanceof ArrayList)){
+            return;
+        }
+
+        drops.remove(name);
     }
 
     public void onEnable(){
@@ -75,9 +99,6 @@ public class EntityManager extends PluginBase implements Listener{
             this.saveResource("config.yml", true);
             this.reloadConfig();
             Utils.logInfo("\"config.yml\"파일이 새로 업데이트 되었습니다.(파일을 확인후 서버를 다시 열어주세요)");
-        }else if(this.getConfig().exists("spawner")){
-            this.getConfig().remove("spawner");
-            this.getConfig().save();
         }
 
         data = (LinkedHashMap<String, Object>) this.getConfig().getAll();
@@ -92,9 +113,6 @@ public class EntityManager extends PluginBase implements Listener{
           [266, 0, "0,8"]
         */
 
-        if(this.getData("autospawn.turn-on", true)){
-            this.getServer().getScheduler().scheduleRepeatingTask(new AutoSpawnTask(), this.getData("autospawn.tick", 100));
-        }
         if(this.getData("autoclear.turn-on", true)){
             this.getServer().getScheduler().scheduleRepeatingTask(new AutoClearTask(), this.getData("autoclear.tick", 6000));
         }
@@ -104,6 +122,10 @@ public class EntityManager extends PluginBase implements Listener{
     }
 
     public void onDisable(){
+        Config drops = new Config(new File(this.getDataFolder(), "drops.yml"), Config.YAML);
+        drops.setAll(EntityManager.drops);
+        drops.save();
+
         Utils.logInfo("Plugin has been disable");
     }
 
@@ -156,10 +178,6 @@ public class EntityManager extends PluginBase implements Listener{
     public void EntityDeathEvent(EntityDeathEvent ev){
         Entity entity = ev.getEntity();
         Class<? extends Entity> clazz = entity.getClass();
-        if(drops.containsKey(clazz.getSimpleName())){
-            return;
-        }
-
         if(!(drops.get(clazz.getSimpleName()) instanceof List)){
             return;
         }
