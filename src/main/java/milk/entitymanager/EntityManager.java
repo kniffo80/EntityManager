@@ -40,13 +40,16 @@ public class EntityManager extends PluginBase implements Listener{
 
     public static void clear(Class[] type, Level level){
         level = level == null ? Server.getInstance().getDefaultLevel() : level;
-        for(Entity entity : level.getEntities()) for(Class clazz : type){
-            if(clazz.isInstance(entity)){
-                entity.close();
+        for(Entity entity : level.getEntities()){
+            for(Class clazz : type){
+                if(clazz.isInstance(entity)){
+                    entity.close();
+                }
             }
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void addEntityDropItem(String name, Item item, int minCount, int maxCount){
         ArrayList<Object> list;
         if(!drops.containsKey(name) || !(drops.get(name) instanceof ArrayList)){
@@ -56,7 +59,6 @@ public class EntityManager extends PluginBase implements Listener{
             list = (ArrayList<Object>) drops.get(name);
         }
 
-        boolean isIn = false;
         for(Object l : list.toArray(new Object[list.size()])){
             if(!(l instanceof ArrayList)){
                 return;
@@ -64,26 +66,22 @@ public class EntityManager extends PluginBase implements Listener{
 
             ArrayList<Object> list1 = (ArrayList<Object>) l;
             if(list1.get(0).equals(item.getId())){
-                isIn = true;
                 list1.set(2, minCount + "," + maxCount);
-                break;
+                return;
             }
         }
 
-        if(!isIn){
-            list.add(new ArrayList<Object>(){{
-                add(item.getId());
-                add(item.getDamage());
-                add(minCount + "," + maxCount);
-            }});
-        }
+        list.add(new ArrayList<Object>(){{
+            add(item.getId());
+            add(item.getDamage());
+            add(minCount + "," + maxCount);
+        }});
     }
 
     public static void resetEntityDropItem(String name){
         if(!drops.containsKey(name) || !(drops.get(name) instanceof ArrayList)){
             return;
         }
-
         drops.remove(name);
     }
 
@@ -103,15 +101,6 @@ public class EntityManager extends PluginBase implements Listener{
 
         data = (LinkedHashMap<String, Object>) this.getConfig().getAll();
         drops = (LinkedHashMap<String, Object>) new Config(new File(this.getDataFolder(), "drops.yml"), Config.YAML).getAll();
-
-        /*Drops Example
-        Zombie:
-          #id  meta count
-          [288, 0, "1,10"],
-          [392, 0, "1,10"]
-        PigZombie:
-          [266, 0, "0,8"]
-        */
 
         if(this.getData("autoclear.turn-on", true)){
             this.getServer().getScheduler().scheduleRepeatingTask(new AutoClearTask(), this.getData("autoclear.tick", 6000));
@@ -175,6 +164,7 @@ public class EntityManager extends PluginBase implements Listener{
     }
 
     @EventHandler
+    @SuppressWarnings("unchecked")
     public void EntityDeathEvent(EntityDeathEvent ev){
         Entity entity = ev.getEntity();
         Class<? extends Entity> clazz = entity.getClass();
@@ -326,9 +316,7 @@ public class EntityManager extends PluginBase implements Listener{
                 break;
         }
 
-        if(output.length() > 0){
-            i.sendMessage(output);
-        }
+        i.sendMessage(output);
         return true;
     }
 
