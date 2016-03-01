@@ -49,6 +49,14 @@ public class EntityManager extends PluginBase implements Listener{
         }
     }
 
+    public static void addEntityDropItem(String name, int id, int minCount, int maxCount){
+        addEntityDropItem(name, Item.get(id), minCount, maxCount);
+    }
+
+    public static void addEntityDropItem(String name, int id, int damage, int minCount, int maxCount){
+        addEntityDropItem(name, Item.get(id, damage), minCount, maxCount);
+    }
+
     @SuppressWarnings("unchecked")
     public static void addEntityDropItem(String name, Item item, int minCount, int maxCount){
         ArrayList<Object> list;
