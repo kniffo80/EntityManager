@@ -1,4 +1,5 @@
 entity:
+  not-spawn: []
   explodeMode: "none" #none, onlyEntity
 autoclear:
   turn-on: true

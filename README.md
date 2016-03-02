@@ -14,15 +14,8 @@ EntityManager는 말 그대로 Entity(Mob, Animal)를 관리하는 플러그인�
   * config.yml
 ``` yml
 entity:
+  not-spawn: [] #스폰을 막을 엔티티 목록
   explodeMode: false #엔티티 폭발모드(none, onlyEntity)
-autospawn:
-  turn-on: true #자동 소환 활성화 여부
-  rand: "1/4" #엔티티 스폰 확률
-  radius: 25 #몹이 스폰될 최대 반경
-  tick: 100 #스폰 주기(20 = 1second)
-  entities:
-    animal: [Cow, Pig, Sheep, Chicken, Slime, Wolf, Ocelot, Rabbit] #소환될 동물 목록
-    monster: [Zombie, Creeper, Skeleton, Spider, PigZombie, Enderman] #소환될 몬스터 목록
 autoclear:
   turn-on: true #엔티티 자동 제거 여부
   tick: 6000 #엔티티 제거 주기(20 = 1second)

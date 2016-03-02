@@ -10,6 +10,7 @@ import cn.nukkit.entity.projectile.EntityProjectile;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.EntityDeathEvent;
+import cn.nukkit.event.entity.EntitySpawnEvent;
 import cn.nukkit.event.entity.ExplosionPrimeEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
@@ -100,6 +101,7 @@ public class EntityManager extends PluginBase implements Listener{
         drops.remove(name);
     }
 
+    @SuppressWarnings("unchecked")
     public static void removeEntityDropItem(String name, Item item){
         if(!drops.containsKey(name) || !(drops.get(name) instanceof ArrayList)){
             return;
@@ -194,6 +196,14 @@ public class EntityManager extends PluginBase implements Listener{
                 ev.setForce(0);
                 ev.setBlockBreaking(false);
                 break;
+        }
+    }
+
+    public void onEntityCreateEvent(EntitySpawnEvent ev){
+        Entity entity = ev.getEntity();
+        ArrayList<String> list = this.getData("entity.not-spawn", new ArrayList<>());
+        if(list.contains(entity.getClass().getSimpleName())){
+            entity.close();
         }
     }
 
