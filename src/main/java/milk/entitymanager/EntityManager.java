@@ -31,15 +31,22 @@ public class EntityManager extends PluginBase implements Listener{
     private static LinkedHashMap<String, Object> drops;
 
     public static void clear(){
-        clear(new Class[]{BaseEntity.class}, null);
+        clear(new Class[]{BaseEntity.class}, Server.getInstance().getDefaultLevel());
     }
 
     public static void clear(Class[] type){
-        clear(type, null);
+        clear(type, Server.getInstance().getDefaultLevel());
+    }
+
+    public static void clear(Class[] type, String levelName){
+        clear(type, Server.getInstance().getLevelByName(levelName));
     }
 
     public static void clear(Class[] type, Level level){
-        level = level == null ? Server.getInstance().getDefaultLevel() : level;
+        if(level == null){
+            return;
+        }
+
         for(Entity entity : level.getEntities()){
             for(Class clazz : type){
                 if(clazz.isInstance(entity)){
