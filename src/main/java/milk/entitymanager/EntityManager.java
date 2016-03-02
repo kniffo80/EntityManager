@@ -76,11 +76,11 @@ public class EntityManager extends PluginBase implements Listener{
 
         for(Object l : list.toArray(new Object[list.size()])){
             if(!(l instanceof ArrayList)){
-                return;
+                continue;
             }
 
             ArrayList<Object> list1 = (ArrayList<Object>) l;
-            if(list1.get(0).equals(item.getId())){
+            if(list1.get(0).equals(item.getId()) && list1.get(1).equals(item.getDamage())){
                 list1.set(2, minCount + "," + maxCount);
                 return;
             }
@@ -98,6 +98,25 @@ public class EntityManager extends PluginBase implements Listener{
             return;
         }
         drops.remove(name);
+    }
+
+    public static void removeEntityDropItem(String name, Item item){
+        if(!drops.containsKey(name) || !(drops.get(name) instanceof ArrayList)){
+            return;
+        }
+
+        ArrayList<Object> list = (ArrayList<Object>) drops.get(name);
+        for(int i = 0; i < list.size(); i++){
+            if(!(list.get(i) instanceof ArrayList)){
+                continue;
+            }
+
+            ArrayList<Object> list1 = (ArrayList<Object>) list.get(i);
+            if(list1.get(0).equals(item.getId()) && list1.get(1).equals(item.getDamage())){
+                list1.remove(i);
+                return;
+            }
+        }
     }
 
     public void onEnable(){
