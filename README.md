@@ -15,7 +15,7 @@ EntityManager는 말 그대로 Entity(Mob, Animal)를 관리하는 플러그인�
 ``` yml
 entity:
   not-spawn: [] #스폰을 막을 엔티티 목록
-  explodeMode: false #엔티티 폭발모드(none, onlyEntity)
+  explodeMode: false #엔티티 폭발모드(none, onlyEntity, cancelled)
 autoclear:
   turn-on: true #엔티티 자동 제거 여부
   tick: 6000 #엔티티 제거 주기(20 = 1second)

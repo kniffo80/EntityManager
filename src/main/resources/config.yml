@@ -1,6 +1,6 @@
 entity:
   not-spawn: []
-  explodeMode: "none" #none, onlyEntity
+  explodeMode: none #none, onlyEntity, cancelled
 autoclear:
   turn-on: true
   tick: 6000

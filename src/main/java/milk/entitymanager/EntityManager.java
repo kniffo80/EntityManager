@@ -32,7 +32,7 @@ public class EntityManager extends PluginBase implements Listener{
     private static LinkedHashMap<String, Object> drops;
 
     public static void clear(){
-        clear(new Class[]{BaseEntity.class}, Server.getInstance().getDefaultLevel());
+        clear(new Class[]{BaseEntity.class});
     }
 
     public static void clear(Class[] type){
@@ -196,6 +196,9 @@ public class EntityManager extends PluginBase implements Listener{
                 ev.setForce(0);
                 ev.setBlockBreaking(false);
                 break;
+            case "cancelled":
+                ev.setCancelled();
+                break;
         }
     }
 
@@ -316,7 +319,7 @@ public class EntityManager extends PluginBase implements Listener{
                 }catch(Exception ignore){}
 
                 if(type1 == -1 || type2.length() < 1){
-                    output += "존재하지 않는 엔티티 이름이에요";
+                    output += "존재하지 않는 엔티티에요";
                     //output += "Entity's name is incorrect";
                     break;
                 }
@@ -348,7 +351,7 @@ public class EntityManager extends PluginBase implements Listener{
                 Entity ent;
                 if((ent = PureEntities.create(type1, pos)) == null){
                     if((ent = PureEntities.create(type2, pos)) == null){
-                        output += "엔티티를 소환하는도중 에러가 발생했습니다";
+                        output += "존재하지 않는 엔티티에요";
                         break;
                     }
                 }
