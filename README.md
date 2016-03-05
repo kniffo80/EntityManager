@@ -21,13 +21,6 @@ autoclear:
   tick: 6000 #엔티티 제거 주기(20 = 1second)
   entities: [Projectile, DroppedItem] #제거될 엔티티 목록
 ```
-  * drops.yml
-``` yml
-Zombie:
-  
-Creeper:
-  
-```
   
 ### Commands(명령어)
   * /entitymanager
