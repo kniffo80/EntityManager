@@ -23,18 +23,9 @@ autoclear:
 ```
   
 ### Commands(명령어)
-  * /entitymanager
-    * usage: /entitymanager (check|remove|spawn)
-    * permission: entitymanager.command
-  * /entitymanager check
-    * usage: /entitymanager check (Level="")
-    * permission: entitymanager.command.check
-    * description: Check the number of entities(If blank, it is set as a default Level)
-  * /entitymanager remove
-    * usage: /entitymanager remove (Level="")
-    * permission: entitymanager.command.remove
-    * description: Remove all entities in Level(If blank, it is set as a default Level)
-  * /entitymanager spawn:
-    * usage: /entitymanager spawn (type) (x="") (y="") (z="") (Level="")
-    * permission: entitymanager.command.spawn
-    * description: literally(If blank, it is set as a Player)
+| Command | Permission | Description |
+| ----- | :---------: | :----------: |
+| `/entitymanager (check|remove|spawn)` | `entitymanager.command`| None |
+| `/entitymanager check (Level="")`| `entitymanager.command.check` | Check the number of entities(If blank, it is set as a default Level)|
+| `/entitymanager remove (Level="")`| `entitymanager.command.remove` | Remove all entities in Level(If blank, it is set as a default Level) |
+| `/entitymanager spawn (type) (x="") (y="") (z="") (Level="")` | `entitymanager.command.spawn`| literally(If blank, it is set as a Player)|
