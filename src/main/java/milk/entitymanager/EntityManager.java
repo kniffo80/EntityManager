@@ -252,11 +252,13 @@ public class EntityManager extends PluginBase implements Listener{
                     //i.sendMessage(TextFormat.RED + "You do not have permission to use this command");
                     return true;
                 }
-                Level level;
+                Level level = null;
                 if(sub.length > 1){
                     level = this.getServer().getLevelByName(sub[1]);
-                }else{
-                    level = i instanceof Player ? ((Player) i).getLevel() : null;
+                }
+
+                if(level == null){
+                    level = i instanceof Player ? ((Player) i).getLevel() : this.getServer().getDefaultLevel();
                 }
 
                 clear(new Class[]{BaseEntity.class, EntityProjectile.class, EntityItem.class}, level);
