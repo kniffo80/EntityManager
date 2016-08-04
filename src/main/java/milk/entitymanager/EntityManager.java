@@ -189,13 +189,14 @@ public class EntityManager extends PluginBase implements Listener{
     @EventHandler
     public void ExplosionPrimeEvent(ExplosionPrimeEvent ev){
         switch(this.getData("entity.explodeMode", "none")){
+            case "entity":
             case "onlyEntity":
                 ev.setBlockBreaking(false);
                 break;
             case "none":
                 ev.setForce(0);
                 ev.setBlockBreaking(false);
-                break;
+            case "cancel":
             case "cancelled":
                 ev.setCancelled();
                 break;

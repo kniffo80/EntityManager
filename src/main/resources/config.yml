@@ -1,7 +1,7 @@
 entity:
   not-spawn: []
-  explodeMode: none #none, onlyEntity, cancelled
+  explodeMode: none #none, entity(onlyEntity), cancel(cancelled)
 autoclear:
   turn-on: true
   tick: 6000
-  entities: [Projectile, DroppedItem]
+  entities: [EntityProjectile, EntityItem]
