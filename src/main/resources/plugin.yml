@@ -1,14 +1,14 @@
-#name, main, version and api are required
 name: EntityManager
 main: milk.entitymanager.EntityManager
-#remember version and api is string, don't write it like this: 1.0.0, or there will be an exception
 version: "1.3"
 api: ["1.0.0"]
 
 load: STARTUP
 author: SW-Team
-description: control entity's movement
+depend: ["PureEntities"]
+description: control entity plugin
 website: https://github.com/SW-Team/EntityManager
+
 commands:
   entitymanager:
     description: control entity command
