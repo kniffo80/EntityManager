@@ -298,8 +298,8 @@ public class EntityManager extends PluginBase implements Listener{
                         other++;
                     }
                 }
-                String k = "--- 월드 " + lv.getName() + " 에 있는 모든 엔티티---\n";
-                //String k = "--- All entities in Level " + level.getName() + " ---\n";
+                String k = "--- 월드 \"" + lv.getFolderName() + "\" 에 있는 모든 엔티티---\n";
+                //String k = "--- All entities in Level \"" + level.getName() + "\" ---\n";
                 k += TextFormat.YELLOW + "Human: %s\n";
                 k += TextFormat.YELLOW + "Living: %s\n";
                 k += TextFormat.YELLOW + "Item: %s\n";
@@ -321,7 +321,7 @@ public class EntityManager extends PluginBase implements Listener{
                     type1 = Integer.parseInt(type2);
                 }catch(Exception ignore){}
 
-                if(type1 == -1 || type2.length() < 1){
+                if(type1 == -1 && type2.length() < 1){
                     output += "존재하지 않는 엔티티에요";
                     //output += "Entity's name is incorrect";
                     break;
