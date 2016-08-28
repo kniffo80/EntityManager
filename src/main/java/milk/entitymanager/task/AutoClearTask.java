@@ -15,19 +15,18 @@ public class AutoClearTask implements Runnable{
     public void run(){
         EntityManager owner = (EntityManager) Server.getInstance().getPluginManager().getPlugin("EntityManager");
         List<String> list = owner.getData("autoclear.entitites", new ArrayList<String>(){{
-            add("EntityProjectile");
-            add("EntityItem");
+            add("Projectile");
+            add("Item");
         }});
         int index = 0;
         Class[] type = new Class[list.size()];
         for(String k : list){
+            if(k.startsWith("Entity")) k = k.replace("Entity", "");
             switch(k){
                 case "Projectile":
-                case "EntityProjectile":
                     type[index++] = EntityProjectile.class;
                     break;
                 case "Item":
-                case "EntityItem":
                 case "DroppedItem":
                     type[index++] = EntityItem.class;
                     break;
